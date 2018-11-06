@@ -52,7 +52,7 @@ router.post('/product-edit/:id', upload.single('imageUpload'), (req,res,next)=>{
     
     //find product in array
     productToEdit = myProducts.find(product=>{
-        return product.id == req.params.id
+        return product.id === req.params.id
     })
     
     productToEdit.id = req.body.id;
@@ -67,7 +67,7 @@ router.post('/product-edit/:id', upload.single('imageUpload'), (req,res,next)=>{
 
 //Product details page
 router.get('/:id',function(req, res, next) {
-    let prod = myProducts.find(product=>{            return product.id == req.params.id        });
+    let prod = myProducts.find(product=>{            return product.id === req.params.id        });
     res.render('product-detail', { product: prod })
 })
 
