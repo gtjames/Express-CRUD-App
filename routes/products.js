@@ -55,24 +55,20 @@ router.post('/product-edit/:id', upload.single('imageUpload'), (req,res,next)=>{
         return product.id == req.params.id
     })
     
-    let imgPath = req.file != undefined ? req.file.originalname:req.body.imagePath;
-
-    productToEdit.id = req.body.id
-    productToEdit.name =  req.body.name
-    productToEdit.price = req.body.price
-    productToEdit.size = req.body.size
-    if(req.file != undefined){
-        productToEdit.image_path = '/images/'+req.file.originalname
-    }
+    productToEdit.id = req.body.id;
+    productToEdit.name =  req.body.name;
+    productToEdit.price = req.body.price;
+    productToEdit.size = req.body.size;
+    let imgPath = req.file == undefined ? req.body.imagePath : '/images/'+req.file.originalname ;
+    productToEdit.image_path = imgPath;
 
     res.redirect('/products')
 })
 
 //Product details page
 router.get('/:id',function(req, res, next) {
-    res.render('product-detail', {
-        product: myProducts.find(product=>{            return product.id == req.params.id        })
-    })
+    let prod = myProducts.find(product=>{            return product.id == req.params.id        });
+    res.render('product-detail', { product: prod })
 })
 
 class Product{
