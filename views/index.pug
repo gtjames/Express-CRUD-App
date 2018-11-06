@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p Number of Visits: #{cnt}
+  p #{param}
+  p
+    a(href='/time') Time
+  p
+    a(href='/users/list') Users
+  p
+    a(href='/?clicked=Testing') Testing
+  p 
+    a(href='/?clicked=Services') Services
+  p You clicked #{linkClicked}
+  p
+    a(href='/products') Products
