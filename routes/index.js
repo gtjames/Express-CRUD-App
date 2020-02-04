@@ -5,13 +5,13 @@ let counter = 0;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  counter++;
   res.render('index', { 
-    title: 'My Page Broh.  Pickle Rick!!',
+    title: 'Product CRUD app!!',
     cnt: counter,
     param:req.query.first,
     linkClicked: req.query.clicked
   });
-    counter++;
 });
 
 module.exports = router;
