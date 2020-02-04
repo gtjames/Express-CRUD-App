@@ -4,15 +4,14 @@ block content
   h1= title
   p Welcome to #{title}
   p Number of Visits: #{cnt}
-  p #{param}
-  p
-    a(href='/time') Time
-  p
-    a(href='/users/list') Users
+  if linkClicked == 'Testing'
+    p testing
+  else
+    p not testing
   p
     a(href='/?clicked=Testing') Testing
   p 
     a(href='/?clicked=Services') Services
-  p You clicked #{linkClicked}
+  p 
   p
     a(href='/products') Products
