@@ -28,17 +28,15 @@ router.get('/product-create',(req, res, next)=> {
 
 //Direct User to Edit Product Form
 router.get('/product-edit/:id',(req, res, next)=> {
-    res.render('product-edit',{
-        product: myProducts.find(product=>{
-            return product.id == req.params.id
-        })
-    })
-})
+    let prodId = req.params.id | 0;
+    let product = myProducts.find(product=>product.id == prodId);
+    res.render('product-edit',{ product: product});
+});
 
 //Post New Product
 router.post('/product-create', upload.single('imageUpload'), (req,res,next)=>{
     myProducts.push({
-       id: req.body.id,
+       id: req.body.id | 0,
        name: req.body.name,
        price: req.body.price,
        size: req.body.size,
@@ -51,15 +49,14 @@ router.post('/product-create', upload.single('imageUpload'), (req,res,next)=>{
 router.post('/product-edit/:id', upload.single('imageUpload'), (req,res,next)=>{
     
     //find product in array
-    productToEdit = myProducts.find(product=>{
-        return product.id === req.params.id
-    })
+    let prodId = req.params.id | 0;
+    productToEdit = myProducts.find(product=> product.id === prodId);
     
-    productToEdit.id = req.body.id;
+    productToEdit.id = req.body.id | 0;
     productToEdit.name =  req.body.name;
     productToEdit.price = req.body.price;
     productToEdit.size = req.body.size;
-    let imgPath = req.file == undefined ? req.body.imagePath : '/images/'+req.file.originalname ;
+    let imgPath = req.file == undefined ? req.body.image_path : '/images/'+req.file.originalname ;
     productToEdit.image_path = imgPath;
 
     res.redirect('/products')
@@ -67,7 +64,8 @@ router.post('/product-edit/:id', upload.single('imageUpload'), (req,res,next)=>{
 
 //Product details page
 router.get('/:id',function(req, res, next) {
-    let prod = myProducts.find(product=>{            return product.id === req.params.id        });
+    let prodId = req.params.id | 0;
+    let prod = myProducts.find(product=> product.id === prodId);
     res.render('product-detail', { product: prod })
 })
 
