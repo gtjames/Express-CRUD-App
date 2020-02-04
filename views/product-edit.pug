@@ -26,7 +26,9 @@ block content
                         input(rows='5', name='size', value=product.size)
                 tr
                     td
-                        input(type='file',name='imageUpload')        
+                        input(type='file', name='imageUpload')
+                        input(type='hidden', name='image_path', value=product.image_path)
+                        
                 tr
                     td
                         br
